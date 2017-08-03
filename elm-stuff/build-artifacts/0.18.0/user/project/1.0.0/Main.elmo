@@ -1,0 +1,492 @@
+var _user$project$Main$viewGameOver = function (bool) {
+	return bool ? A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$style(
+				{
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'position', _1: 'absolute'},
+					_1: {
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'top', _1: '350px'},
+						_1: {
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'left', _1: '300px'},
+							_1: {
+								ctor: '::',
+								_0: {ctor: '_Tuple2', _0: 'color', _1: 'red'},
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				}),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html$text('GameOver'),
+			_1: {ctor: '[]'}
+		}) : A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{ctor: '[]'});
+};
+var _user$project$Main$eqPos = F3(
+	function (x_, y_, _p0) {
+		var _p1 = _p0;
+		return _elm_lang$core$Native_Utils.eq(_p1.x, x_) && _elm_lang$core$Native_Utils.eq(_p1.y, y_);
+	});
+var _user$project$Main$viewScore = function (s) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$style(
+				{
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'position', _1: 'absolute'},
+					_1: {
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'top', _1: '300px'},
+						_1: {
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'left', _1: '300px'},
+							_1: {ctor: '[]'}
+						}
+					}
+				}),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: _elm_lang$svg$Svg$text(
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					'Score: ',
+					_elm_lang$core$Basics$toString(s))),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$Main$rect = F3(
+	function (x, y, c) {
+		return A2(
+			_elm_lang$svg$Svg$rect,
+			{
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$width('25'),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$height('25'),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Attributes$x(
+							_elm_lang$core$Basics$toString(x * 25)),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$y(
+								_elm_lang$core$Basics$toString(y * 25)),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$svg$Svg_Attributes$fill(c),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$svg$Svg_Attributes$stroke('grey'),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				}
+			},
+			{ctor: '[]'});
+	});
+var _user$project$Main$viewNext = function (b) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$style(
+				{
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'position', _1: 'absolute'},
+					_1: {
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'top', _1: '25px'},
+						_1: {
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'left', _1: '300px'},
+							_1: {ctor: '[]'}
+						}
+					}
+				}),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$svg$Svg$svg,
+				{
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$width('100'),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Attributes$height('100'),
+						_1: {ctor: '[]'}
+					}
+				},
+				_elm_lang$core$List$concat(
+					A2(
+						_elm_lang$core$List$indexedMap,
+						F2(
+							function (y, xs) {
+								return A2(
+									_elm_lang$core$List$indexedMap,
+									F2(
+										function (x, c) {
+											return A3(
+												_user$project$Main$rect,
+												x,
+												y,
+												A2(
+													_elm_lang$core$List$any,
+													A2(_user$project$Main$eqPos, x, y),
+													b.vertex) ? _elm_lang$core$Basics$toString(b.color) : c);
+										}),
+									xs);
+							}),
+						A2(
+							_elm_lang$core$List$repeat,
+							4,
+							A2(_elm_lang$core$List$repeat, 4, 'black'))))),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$Main$viewTetris = function (t) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$style(
+				{
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'position', _1: 'absolute'},
+					_1: {
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'top', _1: '25px'},
+						_1: {
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'left', _1: '10px'},
+							_1: {ctor: '[]'}
+						}
+					}
+				}),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$svg$Svg$svg,
+				{
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$width('250'),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Attributes$height('500'),
+						_1: {ctor: '[]'}
+					}
+				},
+				_elm_lang$core$List$concat(
+					_elm_lang$core$Array$toList(
+						A2(
+							_elm_lang$core$Array$indexedMap,
+							F2(
+								function (y, xs) {
+									return _elm_lang$core$Array$toList(
+										A2(
+											_elm_lang$core$Array$indexedMap,
+											F2(
+												function (x, m) {
+													return A3(
+														_user$project$Main$rect,
+														x,
+														y,
+														function () {
+															if (A2(
+																_elm_lang$core$List$any,
+																A2(_user$project$Main$eqPos, x, y),
+																t.block.vertex)) {
+																return _elm_lang$core$Basics$toString(t.block.color);
+															} else {
+																var _p2 = m;
+																if (_p2.ctor === 'Nothing') {
+																	return 'black';
+																} else {
+																	return _elm_lang$core$Basics$toString(_p2._0);
+																}
+															}
+														}());
+												}),
+											xs));
+								}),
+							t.field)))),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$Main$Model = F4(
+	function (a, b, c, d) {
+		return {tetris: a, score: b, next: c, isGameOver: d};
+	});
+var _user$project$Main$Down = {ctor: 'Down'};
+var _user$project$Main$Right = {ctor: 'Right'};
+var _user$project$Main$Left = {ctor: 'Left'};
+var _user$project$Main$Rotate = {ctor: 'Rotate'};
+var _user$project$Main$controller = function (kc) {
+	var _p3 = kc;
+	switch (_p3) {
+		case 37:
+			return _user$project$Main$Left;
+		case 38:
+			return _user$project$Main$Rotate;
+		case 39:
+			return _user$project$Main$Right;
+		case 40:
+			return _user$project$Main$Down;
+		default:
+			return _user$project$Main$Down;
+	}
+};
+var _user$project$Main$subscriptions = function (model) {
+	return _elm_lang$core$Platform_Sub$batch(
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$core$Time$every,
+				_elm_lang$core$Time$second,
+				_elm_lang$core$Basics$always(_user$project$Main$Down)),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$keyboard$Keyboard$downs(_user$project$Main$controller),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$Main$RandomBlock = {ctor: 'RandomBlock'};
+var _user$project$Main$WriteBlock = {ctor: 'WriteBlock'};
+var _user$project$Main$NewBlock = F2(
+	function (a, b) {
+		return {ctor: 'NewBlock', _0: a, _1: b};
+	});
+var _user$project$Main$GameOver = {ctor: 'GameOver'};
+var _user$project$Main$update = F2(
+	function (msg, model) {
+		update:
+		while (true) {
+			var _p4 = msg;
+			switch (_p4.ctor) {
+				case 'Init':
+					return _user$project$Main$init;
+				case 'GameOver':
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Native_Utils.update(
+							model,
+							{isGameOver: true}),
+						_1: _elm_lang$core$Platform_Cmd$none
+					};
+				case 'NewBlock':
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Native_Utils.update(
+							model,
+							{
+								next: A3(_user$project$Tetris$newBlock, _p4._0, _p4._1, model.tetris).block,
+								tetris: {size: model.tetris.size, field: model.tetris.field, block: model.next}
+							}),
+						_1: _elm_lang$core$Platform_Cmd$none
+					};
+				case 'WriteBlock':
+					var _p5 = _user$project$Tetris$writeBlock(model.tetris);
+					if (_p5.ctor === 'Nothing') {
+						var _v5 = _user$project$Main$GameOver,
+							_v6 = model;
+						msg = _v5;
+						model = _v6;
+						continue update;
+					} else {
+						var _v7 = _user$project$Main$RandomBlock,
+							_v8 = _elm_lang$core$Native_Utils.update(
+							model,
+							{tetris: _p5._0});
+						msg = _v7;
+						model = _v8;
+						continue update;
+					}
+				case 'RandomBlock':
+					var rc = A2(
+						_elm_lang$core$Random$int,
+						0,
+						_elm_lang$core$Array$length(_user$project$Tetris$colors) - 1);
+					var rb = A2(
+						_elm_lang$core$Random$int,
+						0,
+						_elm_lang$core$Array$length(_user$project$Tetris$blocks) - 1);
+					var newBlock = A2(
+						_elm_lang$core$Random$generate,
+						_elm_lang$core$Basics$identity,
+						A3(_elm_lang$core$Random$map2, _user$project$Main$NewBlock, rc, rb));
+					return {ctor: '_Tuple2', _0: model, _1: newBlock};
+				case 'Rotate':
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Native_Utils.update(
+							model,
+							{
+								tetris: _user$project$Tetris$rotate(model.tetris)
+							}),
+						_1: _elm_lang$core$Platform_Cmd$none
+					};
+				case 'Left':
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Native_Utils.update(
+							model,
+							{
+								tetris: _user$project$Tetris$left(model.tetris)
+							}),
+						_1: _elm_lang$core$Platform_Cmd$none
+					};
+				case 'Right':
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Native_Utils.update(
+							model,
+							{
+								tetris: _user$project$Tetris$right(model.tetris)
+							}),
+						_1: _elm_lang$core$Platform_Cmd$none
+					};
+				default:
+					var _p6 = _user$project$Tetris$down(model.tetris);
+					if (_p6.ctor === 'Nothing') {
+						var _v10 = _user$project$Main$WriteBlock,
+							_v11 = model;
+						msg = _v10;
+						model = _v11;
+						continue update;
+					} else {
+						var _p7 = _p6._0;
+						var t_ = _user$project$Tetris$delete(_p7);
+						var s = model.score + A2(_user$project$Tetris$score, _p7, t_);
+						return {
+							ctor: '_Tuple2',
+							_0: _elm_lang$core$Native_Utils.update(
+								model,
+								{
+									score: s,
+									tetris: _user$project$Tetris$fall(t_)
+								}),
+							_1: _elm_lang$core$Platform_Cmd$none
+						};
+					}
+			}
+		}
+	});
+var _user$project$Main$init = function () {
+	var model = {
+		tetris: A2(_user$project$Tetris$init, 10, 20),
+		score: 0,
+		next: A2(
+			_user$project$Tetris$Block,
+			_user$project$Tetris$Red,
+			{
+				ctor: '::',
+				_0: A2(_user$project$Tetris$Pos, 0, 0),
+				_1: {ctor: '[]'}
+			}),
+		isGameOver: false
+	};
+	var _p8 = A2(_user$project$Main$update, _user$project$Main$RandomBlock, model);
+	var model_ = _p8._0;
+	var cmd = _p8._1;
+	var _p9 = A2(_user$project$Main$update, _user$project$Main$RandomBlock, model_);
+	var model__ = _p9._0;
+	var cmd_ = _p9._1;
+	return A2(
+		_elm_lang$core$Platform_Cmd_ops['!'],
+		model__,
+		{
+			ctor: '::',
+			_0: cmd,
+			_1: {
+				ctor: '::',
+				_0: cmd_,
+				_1: {ctor: '[]'}
+			}
+		});
+}();
+var _user$project$Main$Init = {ctor: 'Init'};
+var _user$project$Main$viewInit = A2(
+	_elm_lang$html$Html$div,
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html_Attributes$style(
+			{
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: 'position', _1: 'absolute'},
+				_1: {
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'top', _1: '400px'},
+					_1: {
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'left', _1: '300px'},
+						_1: {ctor: '[]'}
+					}
+				}
+			}),
+		_1: {ctor: '[]'}
+	},
+	{
+		ctor: '::',
+		_0: A2(
+			_elm_lang$html$Html$button,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Events$onClick(_user$project$Main$Init),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text('reset'),
+				_1: {ctor: '[]'}
+			}),
+		_1: {ctor: '[]'}
+	});
+var _user$project$Main$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: _user$project$Main$viewInit,
+			_1: {
+				ctor: '::',
+				_0: _user$project$Main$viewScore(model.score),
+				_1: {
+					ctor: '::',
+					_0: _user$project$Main$viewNext(model.next),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Main$viewTetris(model.tetris),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Main$viewGameOver(model.isGameOver),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		});
+};
+var _user$project$Main$main = _elm_lang$html$Html$program(
+	{init: _user$project$Main$init, update: _user$project$Main$update, view: _user$project$Main$view, subscriptions: _user$project$Main$subscriptions})();

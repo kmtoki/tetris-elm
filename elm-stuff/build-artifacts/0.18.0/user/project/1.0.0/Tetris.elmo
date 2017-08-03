@@ -1,0 +1,425 @@
+var _user$project$Tetris$writeBlock = function (t) {
+	var f = F2(
+		function (_p0, m) {
+			var _p1 = _p0;
+			var _p4 = _p1.y;
+			var _p3 = _p1.x;
+			return A2(
+				_elm_lang$core$Maybe$andThen,
+				function (field) {
+					return A2(
+						_elm_lang$core$Maybe$andThen,
+						function (xs) {
+							return A2(
+								_elm_lang$core$Maybe$andThen,
+								function (m) {
+									var _p2 = m;
+									if (_p2.ctor === 'Just') {
+										return _elm_lang$core$Maybe$Nothing;
+									} else {
+										return _elm_lang$core$Maybe$Just(
+											A3(
+												_elm_lang$core$Array$set,
+												_p4,
+												A3(
+													_elm_lang$core$Array$set,
+													_p3,
+													_elm_lang$core$Maybe$Just(t.block.color),
+													xs),
+												field));
+									}
+								},
+								A2(_elm_lang$core$Array$get, _p3, xs));
+						},
+						A2(_elm_lang$core$Array$get, _p4, field));
+				},
+				m);
+		});
+	return A2(
+		_elm_lang$core$Maybe$andThen,
+		function (field) {
+			return _elm_lang$core$Maybe$Just(
+				_elm_lang$core$Native_Utils.update(
+					t,
+					{field: field}));
+		},
+		A3(
+			_elm_lang$core$List$foldl,
+			f,
+			_elm_lang$core$Maybe$Just(t.field),
+			t.block.vertex));
+};
+var _user$project$Tetris$isCollision = function (t) {
+	var f = function (_p5) {
+		var _p6 = _p5;
+		var _p7 = A2(_elm_lang$core$Array$get, _p6.y, t.field);
+		if (_p7.ctor === 'Nothing') {
+			return true;
+		} else {
+			var _p8 = A2(_elm_lang$core$Array$get, _p6.x, _p7._0);
+			if (_p8.ctor === 'Nothing') {
+				return true;
+			} else {
+				var _p9 = _p8._0;
+				if (_p9.ctor === 'Nothing') {
+					return false;
+				} else {
+					return true;
+				}
+			}
+		}
+	};
+	return A2(_elm_lang$core$List$any, f, t.block.vertex);
+};
+var _user$project$Tetris$isJust = function (m) {
+	var _p10 = m;
+	if (_p10.ctor === 'Nothing') {
+		return false;
+	} else {
+		return true;
+	}
+};
+var _user$project$Tetris$isNothing = function (_p11) {
+	return !_user$project$Tetris$isJust(_p11);
+};
+var _user$project$Tetris$all = function (f) {
+	return A2(
+		_elm_lang$core$Array$foldl,
+		F2(
+			function (a, b) {
+				return b && f(a);
+			}),
+		true);
+};
+var _user$project$Tetris$delete = function (t) {
+	var f = A2(
+		_elm_lang$core$Array$map,
+		function (xs) {
+			return A2(_user$project$Tetris$all, _user$project$Tetris$isJust, xs) ? A2(
+				_elm_lang$core$Array$map,
+				function (_p12) {
+					return _elm_lang$core$Maybe$Nothing;
+				},
+				xs) : xs;
+		},
+		t.field);
+	return _elm_lang$core$Native_Utils.update(
+		t,
+		{field: f});
+};
+var _user$project$Tetris$fall = function (t) {
+	var f_ = A2(
+		_elm_lang$core$Array$filter,
+		function (xs) {
+			return !A2(_user$project$Tetris$all, _user$project$Tetris$isNothing, xs);
+		},
+		t.field);
+	var f = A2(
+		_elm_lang$core$Array$append,
+		A2(
+			_elm_lang$core$Array$repeat,
+			_elm_lang$core$Array$length(t.field) - _elm_lang$core$Array$length(f_),
+			A2(_elm_lang$core$Array$repeat, t.size.width, _elm_lang$core$Maybe$Nothing)),
+		f_);
+	return _elm_lang$core$Native_Utils.update(
+		t,
+		{field: f});
+};
+var _user$project$Tetris$score = F2(
+	function (t, t_) {
+		var f = function (t) {
+			return _elm_lang$core$List$sum(
+				_elm_lang$core$Array$toList(
+					A2(
+						_elm_lang$core$Array$map,
+						function (xs) {
+							return A2(_user$project$Tetris$all, _user$project$Tetris$isNothing, xs) ? 1 : 0;
+						},
+						t.field)));
+		};
+		return f(t_) - f(t);
+	});
+var _user$project$Tetris$Size = F2(
+	function (a, b) {
+		return {width: a, height: b};
+	});
+var _user$project$Tetris$Pos = F2(
+	function (a, b) {
+		return {x: a, y: b};
+	});
+var _user$project$Tetris$blocks = _elm_lang$core$Array$fromList(
+	{
+		ctor: '::',
+		_0: {
+			ctor: '::',
+			_0: A2(_user$project$Tetris$Pos, 0, 0),
+			_1: {
+				ctor: '::',
+				_0: A2(_user$project$Tetris$Pos, 0, 1),
+				_1: {
+					ctor: '::',
+					_0: A2(_user$project$Tetris$Pos, 0, 2),
+					_1: {
+						ctor: '::',
+						_0: A2(_user$project$Tetris$Pos, 0, 3),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		},
+		_1: {
+			ctor: '::',
+			_0: {
+				ctor: '::',
+				_0: A2(_user$project$Tetris$Pos, 0, 0),
+				_1: {
+					ctor: '::',
+					_0: A2(_user$project$Tetris$Pos, 1, 0),
+					_1: {
+						ctor: '::',
+						_0: A2(_user$project$Tetris$Pos, 1, 1),
+						_1: {
+							ctor: '::',
+							_0: A2(_user$project$Tetris$Pos, 2, 1),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			},
+			_1: {
+				ctor: '::',
+				_0: {
+					ctor: '::',
+					_0: A2(_user$project$Tetris$Pos, 0, 1),
+					_1: {
+						ctor: '::',
+						_0: A2(_user$project$Tetris$Pos, 1, 1),
+						_1: {
+							ctor: '::',
+							_0: A2(_user$project$Tetris$Pos, 1, 0),
+							_1: {
+								ctor: '::',
+								_0: A2(_user$project$Tetris$Pos, 2, 0),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				},
+				_1: {
+					ctor: '::',
+					_0: {
+						ctor: '::',
+						_0: A2(_user$project$Tetris$Pos, 0, 0),
+						_1: {
+							ctor: '::',
+							_0: A2(_user$project$Tetris$Pos, 1, 0),
+							_1: {
+								ctor: '::',
+								_0: A2(_user$project$Tetris$Pos, 0, 1),
+								_1: {
+									ctor: '::',
+									_0: A2(_user$project$Tetris$Pos, 1, 1),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					},
+					_1: {
+						ctor: '::',
+						_0: {
+							ctor: '::',
+							_0: A2(_user$project$Tetris$Pos, 0, 0),
+							_1: {
+								ctor: '::',
+								_0: A2(_user$project$Tetris$Pos, 1, 0),
+								_1: {
+									ctor: '::',
+									_0: A2(_user$project$Tetris$Pos, 2, 0),
+									_1: {
+										ctor: '::',
+										_0: A2(_user$project$Tetris$Pos, 1, 1),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						},
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		}
+	});
+var _user$project$Tetris$Block = F2(
+	function (a, b) {
+		return {color: a, vertex: b};
+	});
+var _user$project$Tetris$rotate = function (t) {
+	var mx = _elm_lang$core$Basics$toFloat(
+		_elm_lang$core$List$sum(
+			A2(
+				_elm_lang$core$List$map,
+				function (_) {
+					return _.x;
+				},
+				t.block.vertex))) / _elm_lang$core$Basics$toFloat(
+		_elm_lang$core$List$length(t.block.vertex));
+	var my = _elm_lang$core$Basics$toFloat(
+		_elm_lang$core$List$sum(
+			A2(
+				_elm_lang$core$List$map,
+				function (_) {
+					return _.y;
+				},
+				t.block.vertex))) / _elm_lang$core$Basics$toFloat(
+		_elm_lang$core$List$length(t.block.vertex));
+	var r = _elm_lang$core$Basics$pi / 2.0;
+	var f = function (_p13) {
+		var _p14 = _p13;
+		var y_ = _elm_lang$core$Basics$toFloat(_p14.y);
+		var x_ = _elm_lang$core$Basics$toFloat(_p14.x);
+		return A2(
+			_user$project$Tetris$Pos,
+			_elm_lang$core$Basics$round(
+				(mx + ((x_ - mx) * _elm_lang$core$Basics$cos(r))) - ((y_ - my) * _elm_lang$core$Basics$sin(r))),
+			_elm_lang$core$Basics$round(
+				(my + ((x_ - mx) * _elm_lang$core$Basics$sin(r))) + ((y_ - my) * _elm_lang$core$Basics$cos(r))));
+	};
+	var t_ = _elm_lang$core$Native_Utils.update(
+		t,
+		{
+			block: A2(
+				_user$project$Tetris$Block,
+				t.block.color,
+				A2(_elm_lang$core$List$map, f, t.block.vertex))
+		});
+	return _user$project$Tetris$isCollision(t_) ? t : t_;
+};
+var _user$project$Tetris$left = function (t) {
+	var f = function (_p15) {
+		var _p16 = _p15;
+		return A2(_user$project$Tetris$Pos, _p16.x - 1, _p16.y);
+	};
+	var t_ = _elm_lang$core$Native_Utils.update(
+		t,
+		{
+			block: A2(
+				_user$project$Tetris$Block,
+				t.block.color,
+				A2(_elm_lang$core$List$map, f, t.block.vertex))
+		});
+	return _user$project$Tetris$isCollision(t_) ? t : t_;
+};
+var _user$project$Tetris$right = function (t) {
+	var f = function (_p17) {
+		var _p18 = _p17;
+		return A2(_user$project$Tetris$Pos, _p18.x + 1, _p18.y);
+	};
+	var t_ = _elm_lang$core$Native_Utils.update(
+		t,
+		{
+			block: A2(
+				_user$project$Tetris$Block,
+				t.block.color,
+				A2(_elm_lang$core$List$map, f, t.block.vertex))
+		});
+	return _user$project$Tetris$isCollision(t_) ? t : t_;
+};
+var _user$project$Tetris$down = function (t) {
+	var f = function (_p19) {
+		var _p20 = _p19;
+		return A2(_user$project$Tetris$Pos, _p20.x, _p20.y + 1);
+	};
+	var t_ = _elm_lang$core$Native_Utils.update(
+		t,
+		{
+			block: A2(
+				_user$project$Tetris$Block,
+				t.block.color,
+				A2(_elm_lang$core$List$map, f, t.block.vertex))
+		});
+	return _user$project$Tetris$isCollision(t_) ? _elm_lang$core$Maybe$Nothing : _elm_lang$core$Maybe$Just(t_);
+};
+var _user$project$Tetris$Tetris = F3(
+	function (a, b, c) {
+		return {size: a, field: b, block: c};
+	});
+var _user$project$Tetris$White = {ctor: 'White'};
+var _user$project$Tetris$Cyan = {ctor: 'Cyan'};
+var _user$project$Tetris$Purple = {ctor: 'Purple'};
+var _user$project$Tetris$Yellow = {ctor: 'Yellow'};
+var _user$project$Tetris$Green = {ctor: 'Green'};
+var _user$project$Tetris$Blue = {ctor: 'Blue'};
+var _user$project$Tetris$Red = {ctor: 'Red'};
+var _user$project$Tetris$init = F2(
+	function (w, h) {
+		return {
+			size: A2(_user$project$Tetris$Size, w, h),
+			field: A2(
+				_elm_lang$core$Array$repeat,
+				h,
+				A2(_elm_lang$core$Array$repeat, w, _elm_lang$core$Maybe$Nothing)),
+			block: A2(
+				_user$project$Tetris$Block,
+				_user$project$Tetris$Red,
+				{ctor: '[]'})
+		};
+	});
+var _user$project$Tetris$colors = _elm_lang$core$Array$fromList(
+	{
+		ctor: '::',
+		_0: _user$project$Tetris$Red,
+		_1: {
+			ctor: '::',
+			_0: _user$project$Tetris$Blue,
+			_1: {
+				ctor: '::',
+				_0: _user$project$Tetris$Green,
+				_1: {
+					ctor: '::',
+					_0: _user$project$Tetris$Yellow,
+					_1: {
+						ctor: '::',
+						_0: _user$project$Tetris$Purple,
+						_1: {
+							ctor: '::',
+							_0: _user$project$Tetris$Cyan,
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		}
+	});
+var _user$project$Tetris$newBlock = F3(
+	function (c, b, t) {
+		var block = function () {
+			var _p21 = A2(_elm_lang$core$Array$get, c, _user$project$Tetris$colors);
+			if (_p21.ctor === 'Nothing') {
+				return A2(
+					_user$project$Tetris$Block,
+					_user$project$Tetris$White,
+					{
+						ctor: '::',
+						_0: A2(_user$project$Tetris$Pos, 0, 0),
+						_1: {ctor: '[]'}
+					});
+			} else {
+				var _p22 = A2(_elm_lang$core$Array$get, b, _user$project$Tetris$blocks);
+				if (_p22.ctor === 'Nothing') {
+					return A2(
+						_user$project$Tetris$Block,
+						_user$project$Tetris$White,
+						{
+							ctor: '::',
+							_0: A2(_user$project$Tetris$Pos, 0, 0),
+							_1: {ctor: '[]'}
+						});
+				} else {
+					return A2(_user$project$Tetris$Block, _p21._0, _p22._0);
+				}
+			}
+		}();
+		return _elm_lang$core$Native_Utils.update(
+			t,
+			{block: block});
+	});
